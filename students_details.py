@@ -30,7 +30,6 @@ class Students:
             query = "INSERT INTO STUDENTS (Name, marks1, marks2) VALUES (%s, %s, %s)"
             values = (details.name, details.marks1, details.marks2)
             cursor.execute(query, values)
-
             db_conn.commit()
 
             print("Student details added Successfully")
@@ -44,7 +43,6 @@ class Students:
             query = "SELECT * FROM STUDENTS WHERE Roll_No = %s"
             cursor.execute(query, (rollno,))
             result = cursor.fetchone()
-
             if result:
                 print('Student Details:')
                 print(f"Name : {result[1]}")
@@ -79,14 +77,11 @@ class Students:
     def update_student(cursor, rollno, **kwargs):   
     
         try:
-
             set_clause = ", ".join(f"{field} = %s " for field in kwargs)
             query = f"UPDATE STUDENTS SET {set_clause} WHERE Roll_No= %s"
             values = [kwargs[field] for field in kwargs] + [rollno]
-
             cursor.execute(query, values)
 
-            
             print("Student details updated successfully")
 
         except Exception as e:
@@ -123,7 +118,7 @@ db_conn = Students.db_connection()
 cursor = db_conn.cursor()
 
 # The following line will automatically assign a roll_no
-#Students.add_student(cursor, student2)
+# Students.add_student(cursor, student2)
 # Students.update_student(cursor, 2,marks2= 16, marks1=41)
 # Students.view_student(cursor, 2)
 # Students.delete_student(cursor, 1)
